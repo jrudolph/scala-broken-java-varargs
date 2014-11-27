@@ -7,8 +7,8 @@ public class Test extends VarargClass {
         ObjectInheritsImplFromClass.x("a", "b", "c");
         ObjectOverridesImplFromTrait.x("a", "b", "c"); // underlined red in IDEA
         ObjectOverridesImplFromClass.x("a", "b", "c"); // underlined red in IDEA
-        // ObjectImplementsTrait.x("a", "b", "c"); // doesn't compile, bridge missing
-        // ObjectImplementsClass.x("a", "b", "c"); // doesn't compile, bridge missing
+        // ObjectImplementsTrait.x("a", "b", "c"); // doesn't compile
+        // ObjectImplementsClass.x("a", "b", "c"); // doesn't compile
 
         // Companions objects:
         // VarargTrait.x(5); // static forwarders missing in companion objects
@@ -24,8 +24,16 @@ public class Test extends VarargClass {
         new ClassInheritsImplFromClass().x("a", "b", "c");
         new ClassOverridesImplFromTrait().x("a", "b", "c");
         new ClassOverridesImplFromClass().x("a", "b", "c");
-        // new ClassImplementsTrait().x("a", "b", "c"); // doesn't compile, bridge missing
-        // new ClassImplementsClass().x("a", "b", "c"); // doesn't compile, bridge missing
+        // new ClassImplementsTrait().x("a", "b", "c"); // doesn't compile
+        // new ClassImplementsClass().x("a", "b", "c"); // doesn't compile
+
+        // trying to change the calling convention
+        ((VarargTrait) new ClassInheritsImplFromTrait()).x("a", "b", "c");
+        ((VarargClass) new ClassInheritsImplFromClass()).x("a", "b", "c");
+        ((VarargTrait) new ClassOverridesImplFromTrait()).x("a", "b", "c");
+        ((VarargClass)new ClassOverridesImplFromClass()).x("a", "b", "c");
+        // ((VarargAbstractTrait) new ClassImplementsTrait()).x("a", "b", "c"); // compiles but fails at runtime with AbstractMethodError
+        // ((VarargAbstractClass) new ClassImplementsClass()).x("a", "b", "c"); // compiles but fails at runtime with AbstractMethodError
 
         Anonymous.inheritsImplFromTrait().x("a", "b", "c");
         Anonymous.inheritsImplFromClass().x("a", "b", "c");
@@ -39,8 +47,6 @@ public class Test extends VarargClass {
         // ObjectImplementsJavaInterface.x("a", "b", "c"); // doesn't compile, javac finds only Seq<String> method
         // new ClassImplementsJavaInterface().x("a", "b", "c"); // doesn't compile, javac finds only Seq<String> method
 
-        ((JavaInterface) new ClassImplementsJavaInterface()).x("a", "b", "c");
-
         JavaInterface i1 = ObjectImplementsJavaInterface$.MODULE$;
         i1.x("a", "b", "c");
         JavaInterface i2 = new ClassImplementsJavaInterface();
@@ -52,14 +58,21 @@ public class Test extends VarargClass {
         // ObjectInheritsFromJavaClass.x("a", "b", "c"); // doesn't compile, javac finds only String[] method
         new ClassInheritsFromJavaClass().x("a", "b", "c");
 
+        ((JavaInterface) new ClassImplementsJavaInterface()).x("a", "b", "c");
+        ((JavaAbstractClass) new ClassImplementsJavaAbstractClass()).x("a", "b", "c");
+        ((JavaClass) new ClassInheritsFromJavaClass()).x("a", "b", "c");
+
         // Java classes implementing Scala traits/classes with @varargs methods
         new JavaClassInheritsImplFromClass().x("a", "b", "c");
         new JavaClassOverridesImplFromClass().x("a", "b", "c");
 
+        ((VarargClass) new JavaClassInheritsImplFromClass()).x("a", "b", "c");
+        ((VarargClass) new JavaClassOverridesImplFromClass()).x("a", "b", "c");
+
         new JavaClassInheritsImplFromClass().run();
         new JavaClassOverridesImplFromClass().run();
 
-        new Test().x("a", "b", "c");
+        new Test().test();
 
         new JavaClassInheritsFromClassMixingInTrait().run();
     }
