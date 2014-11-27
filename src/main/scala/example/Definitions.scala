@@ -13,6 +13,7 @@ trait VarargTrait {
   @varargs
   def x(els: String*): Int = els.length
 }
+object VarargTrait extends VarargTrait
 object ObjectInheritsImplFromTrait extends VarargTrait
 class ClassInheritsImplFromTrait extends VarargTrait
 
@@ -21,6 +22,7 @@ abstract class VarargClass {
   @varargs
   def x(els: String*): Int = els.length
 }
+object VarargClass extends VarargClass
 object ObjectInheritsImplFromClass extends VarargClass
 class ClassInheritsImplFromClass extends VarargClass
 

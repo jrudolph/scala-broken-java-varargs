@@ -10,6 +10,16 @@ public class Test extends VarargClass {
         // ObjectImplementsTrait.x("a", "b", "c"); // doesn't compile, bridge missing
         // ObjectImplementsClass.x("a", "b", "c"); // doesn't compile, bridge missing
 
+        // Companions objects:
+        // VarargTrait.x(5); // static forwarders missing in companion objects
+        // VarargTrait.x("a", "b", "c"); // static forwarders missing in companion objects
+        VarargTrait$.MODULE$.x(5);
+        VarargTrait$.MODULE$.x("a", "b", "c");
+        // VarargClass.x(5); // static forwarders missing in companion objects
+        // VarargClass.x("a", "b", "c"); // static forwarders missing in companion objects
+        VarargClass$.MODULE$.x(5);
+        VarargClass$.MODULE$.x("a", "b", "c");
+
         new ClassInheritsImplFromTrait().x("a", "b", "c");
         new ClassInheritsImplFromClass().x("a", "b", "c");
         new ClassOverridesImplFromTrait().x("a", "b", "c");
