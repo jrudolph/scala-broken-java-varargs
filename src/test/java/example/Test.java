@@ -34,6 +34,24 @@ public class Test extends VarargClass {
         // Anonymous.implementsTrait().x("a", "b", "c"); // compiles but fails at runtime with AbstractMethodError (SI-1459)
         // Anonymous.implementsClass().x("a", "b", "c"); // compiles but fails at runtime with AbstractMethodError (SI-1459)
 
+        // Java interface implemented from Java
+
+        // ObjectImplementsJavaInterface.x("a", "b", "c"); // doesn't compile, javac finds only Seq<String> method
+        // new ClassImplementsJavaInterface().x("a", "b", "c"); // doesn't compile, javac finds only Seq<String> method
+
+        ((JavaInterface) new ClassImplementsJavaInterface()).x("a", "b", "c");
+
+        JavaInterface i1 = ObjectImplementsJavaInterface$.MODULE$;
+        i1.x("a", "b", "c");
+        JavaInterface i2 = new ClassImplementsJavaInterface();
+        i2.x("a", "b", "c");
+
+        // ObjectImplementsJavaAbstractClass.x("a", "b", "c"); // doesn't compile, javac finds only Seq<String> method
+        new ClassImplementsJavaAbstractClass().x("a", "b", "c");
+
+        // ObjectInheritsFromJavaClass.x("a", "b", "c"); // doesn't compile, javac finds only String[] method
+        new ClassInheritsFromJavaClass().x("a", "b", "c");
+
         new JavaClassInheritsImplFromClass().x("a", "b", "c");
         new JavaClassOverridesImplFromClass().x("a", "b", "c");
 

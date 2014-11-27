@@ -83,3 +83,20 @@ object Anonymous {
 
 trait TraitInheritsFromTrait extends VarargTrait
 abstract class ClassInheritsFromTraitInheritsFromTrait extends TraitInheritsFromTrait
+
+object ObjectImplementsJavaInterface extends JavaInterface {
+  def x(els: String*): Int = els.length
+}
+class ClassImplementsJavaInterface extends JavaInterface {
+  def x(els: String*): Int = els.length
+}
+
+object ObjectImplementsJavaAbstractClass extends JavaAbstractClass {
+  def x(els: String*): Int = els.length
+}
+class ClassImplementsJavaAbstractClass extends JavaAbstractClass {
+  def x(els: String*): Int = els.length
+}
+
+object ObjectInheritsFromJavaClass extends JavaClass
+class ClassInheritsFromJavaClass extends JavaClass
