@@ -25,7 +25,7 @@ public class Test extends VarargClass {
         new ClassOverridesImplFromTrait().x("a", "b", "c");
         new ClassOverridesImplFromClass().x("a", "b", "c");
         // new ClassImplementsTrait().x("a", "b", "c"); // doesn't compile
-        // new ClassImplementsClass().x("a", "b", "c"); // doesn't compile
+        // new ClassImplementsClass().x("a", "b", "c"); // compiles but fails at runtime with AbstractMethodError
 
         // trying to change the calling convention
         ((VarargTrait) new ClassInheritsImplFromTrait()).x("a", "b", "c");
@@ -47,10 +47,10 @@ public class Test extends VarargClass {
         // ObjectImplementsJavaInterface.x("a", "b", "c"); // doesn't compile, javac finds only Seq<String> method
         // new ClassImplementsJavaInterface().x("a", "b", "c"); // doesn't compile, javac finds only Seq<String> method
 
-        JavaInterface i1 = ObjectImplementsJavaInterface$.MODULE$;
-        i1.x("a", "b", "c");
-        JavaInterface i2 = new ClassImplementsJavaInterface();
-        i2.x("a", "b", "c");
+        // ObjectImplementsJavaInterface$.MODULE$.x("a", "b", "c"); // doesn't compile, javac finds only Seq<String> method
+        ((JavaInterface) ObjectImplementsJavaInterface$.MODULE$).x("a", "b", "c");
+        // new ClassImplementsJavaInterface().x("a", "b", "c"); // doesn't compile, javac finds only Seq<String> method
+        ((JavaInterface) new ClassImplementsJavaInterface()).x("a", "b", "c");
 
         // ObjectImplementsJavaAbstractClass.x("a", "b", "c"); // doesn't compile, javac finds only Seq<String> method
         new ClassImplementsJavaAbstractClass().x("a", "b", "c");

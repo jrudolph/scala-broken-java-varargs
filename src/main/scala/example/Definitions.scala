@@ -52,7 +52,7 @@ class ClassImplementsTrait extends VarargAbstractTrait {
   override def x(els: String*): Int = els.length
 }
 
-trait VarargAbstractClass {
+abstract class VarargAbstractClass {
   def x(i: Int): Int = i
   @varargs
   def x(els: String*): Int
