@@ -11,12 +11,12 @@ public class Test extends VarargClass {
         // ObjectImplementsClass.x("a", "b", "c"); // doesn't compile
 
         // Companions objects:
-        // VarargTrait.x(5); // static forwarders missing in companion objects
-        // VarargTrait.x("a", "b", "c"); // static forwarders missing in companion objects
+        // VarargTrait.x(5); // static forwarders missing in companion objects (name conflict with inherited instance methods)
+        // VarargTrait.x("a", "b", "c"); // static forwarders missing in companion objects (name conflict with inherited instance methods)
         VarargTrait$.MODULE$.x(5);
         VarargTrait$.MODULE$.x("a", "b", "c");
-        // VarargClass.x(5); // static forwarders missing in companion objects
-        // VarargClass.x("a", "b", "c"); // static forwarders missing in companion objects
+        // VarargClass.x(5); // static forwarders missing in companion objects (name conflict with inherited instance methods)
+        // VarargClass.x("a", "b", "c"); // static forwarders missing in companion objects (name conflict with inherited instance methods)
         VarargClass$.MODULE$.x(5);
         VarargClass$.MODULE$.x("a", "b", "c");
 
