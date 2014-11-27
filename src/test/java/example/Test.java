@@ -52,6 +52,7 @@ public class Test extends VarargClass {
         // ObjectInheritsFromJavaClass.x("a", "b", "c"); // doesn't compile, javac finds only String[] method
         new ClassInheritsFromJavaClass().x("a", "b", "c");
 
+        // Java classes implementing Scala traits/classes with @varargs methods
         new JavaClassInheritsImplFromClass().x("a", "b", "c");
         new JavaClassOverridesImplFromClass().x("a", "b", "c");
 
